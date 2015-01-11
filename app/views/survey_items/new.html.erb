@@ -1,0 +1,14 @@
+<% content_for :page_title do %>
+New Survey Item -
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>New survey_item</h1>
+  </div>
+
+  <%= render 'form' %>
+
+  <div class="clearfix"></div>
+
+<%= link_to 'Cancel', survey_items_path, class: 'btn btn-default' %>
+</div>

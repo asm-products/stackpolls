@@ -1,0 +1,38 @@
+<% content_for :page_title do %>
+Accept Editor Invitation -
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      Accept Editor Invitation
+      
+      <small>for '<%= @survey.title %>' Survey</small>
+    </h1>
+  </div>
+  
+
+  <p class="lead">
+    You've been invited by <%= image_tag @editor.inviter.picurl %>  <%= @editor.inviter.name %> to become an editor and view results of the '<%= @survey.title %>' survey.  
+  </p>
+
+  <% if authed_user %>
+  <p>
+    To accept this invite, you need to connect your Google Account with this invitation. You're currently linked with your <%= image_tag authed_user.picurl %> <%= authed_user.name %> &lt;<%= authed_user.email %>&gt;.
+    <br>
+    <a class="btn btn-success btn-lg" id="accept-editor-invite-button" rel="<%= accept_survey_editor_url(@survey, @editor, format: 'json') %>" data-success-url="<%= survey_editor_url(@survey, @editor) %>">Accept with <%= authed_user.email %></a>
+  </p>
+  <hr>
+  <p>
+    <small>
+      If you want to connect a different Google Account to become an editor, 
+      <%= link_to "Connect a Different Google Account", "/sessions/google/new?next=#{u(request.url)}", class: 'btn btn-warning btn-xs' %>
+    </small>
+  </p>
+  <% else %>
+  <p>
+    To accept, you need to
+    <a class="btn btn-success" href="/sessions/google/new?next=<%= u request.url %>">Connect a Google Account...</a> 
+  </p> 
+  <% end %>
+
+</div>

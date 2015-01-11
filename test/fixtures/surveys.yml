@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  permalink: MyString
+  title: MyString
+  headline: MyString
+  subheader: MyString
+  thanks_headline: MyString
+  thanks_subheader: MyString
+  thanks_continue_url: MyString
+  invite_required: false
+
+two:
+  user_id: 
+  permalink: MyString
+  title: MyString
+  headline: MyString
+  subheader: MyString
+  thanks_headline: MyString
+  thanks_subheader: MyString
+  thanks_continue_url: MyString
+  invite_required: false

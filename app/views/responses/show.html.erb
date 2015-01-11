@@ -1,0 +1,84 @@
+<% content_for :page_title do %>
+Survey Response for '<%= @survey.title %>' Survey -
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to '<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>'.html_safe, survey_responses_path(@response.survey), class: 'btn btn-default', title: 'Back to My Surveys' %> 
+        &nbsp;
+      </div>
+      
+      Survey Response
+      
+      <small>for '<%= @survey.title %>' Survey</small>
+    </h1>
+  </div>
+  
+  <div class="row">
+    <label class="col-sm-4 text-right text-muted">Who:</label>
+    <span class="col-sm-8">
+      &quot;<%= @response.name %>&quot; &lt;<%= link_to @response.email, "mailto:#{@response.email}" %>&gt;
+    </span>
+  </div>
+  
+  <div class="row">
+    <label class="col-sm-4 text-right text-muted">When:</label>
+    <span class="col-sm-8">
+      <%= "#{time_ago_in_words(@response.created_at)} ago"  %>
+    </span>
+  </div>
+  
+  
+  <div class="row">
+    <label class="col-sm-4 text-right text-muted">Invitation:</label>
+    <span class="col-sm-8">
+      <%= @response.invite ? link_to('Yes', [@response.survey, @response.invite]) : '<span class="text-muted">N/A</span>'.html_safe %>
+    </span>
+  </div>
+  
+  <div class="row">
+    <label class="col-sm-4 text-right text-muted">Comments:</label>
+    <span class="col-sm-8">
+      <% if @response.comments.blank? %>
+      <span class="text-muted">N/A</span>
+    
+      <% else %>
+      <blockquote>
+        <%= @response.comments %>
+      </blockquote>
+      <% end %>
+    </span>
+  </div>
+
+  <div class="page-header">
+    <h2>Ranking</h2>
+  </div>
+  
+  
+  <table class="table table-bordered tablesorter" id="item-ranks-ranking-table">
+    <thead>
+      <tr>
+        <th><span>Item</span></th>
+        <th class="count-column"><span>Stack Rank</span></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% unless @response.item_ranks.any? %>
+      <tr id="empty-table">
+        <td class="bg-danger" colspan="2"><strong>Bugger!</strong> This has no associated rankings... very odd.</td>
+      </tr>
+      <% end %>
+      
+      <% @response.item_ranks(order: 'rank asc').each do |item_rank| %>
+      <% survey_item = item_rank.survey_item %>
+      <tr>
+        <td><%= survey_item.headline %> <small class="text-muted"><%= truncate survey_item.description %></small></td>
+        <td class="count-column"><%= item_rank.rank + 1 %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

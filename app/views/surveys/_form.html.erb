@@ -1,0 +1,201 @@
+<%= form_for(@survey, { html: { role: 'form', class: 'form-horizontal'}}) do |f| %>
+<% if @survey.errors.any? %>
+<div id="error_explanation" class="alert alert-danger" role="alert">
+  <strong><%= pluralize(@survey.errors.count, "error") %> prohibited this survey from being saved:</strong>
+
+  <ul>
+    <% @survey.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+<div class="col-sm-12">
+  <div class="form-group<%= f.object.errors[:title].empty? ? '' : ' has-error has-feedback' %>">
+    <%#= f.label :title, { class: 'control-label col-sm-1' } %>
+    <div class="col-sm-12">
+      <%= f.text_field :title, { class: 'form-control title-control', autofocus: 'autofocus', placeholder: "Survey Title"  } %>
+    </div>
+  </div>
+</div>
+<% unless f.object.new_record? %>
+<div class="col-sm-12">
+  <div class="form-group<%= f.object.errors[:permalink].empty? ? '' : ' has-error has-feedback' %>">
+    <%#= f.label :permalink, { class: 'control-label col-sm-1' } %>
+    <div class="col-sm-12">
+      <div class="input-group">
+        <div class="input-group-addon"><%= surveys_url + "/" %></div>
+        <%= f.text_field :permalink, { class: 'form-control' } %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-sm-12">
+  <div class="form-group<%= f.object.errors[:required_google_apps_domain_login].empty? ? '' : ' has-error has-feedback' %>">
+    <%= f.label :required_google_apps_domain_login, { class: 'control-label col-sm-3' } %>
+    <div class="col-sm-9">
+      <%= f.text_field :required_google_apps_domain_login, { class: 'form-control', placeholder: 'mycompany.com' } %>
+      <p class="help-block">Optional - fill a domain if you want to require form respondents to have logged in via Google.</p>
+    </div>
+  </div>
+</div>
+<div class="col-sm-12">
+  <div class="form-group<%= f.object.errors[:invite_required].empty? ? '' : ' has-error has-feedback' %>">
+    <%#= f.label :invite_required, { class: 'control-label col-sm-1' } %>
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <%= f.check_box :invite_required %>
+        </span>
+        <%= f.label :invite_required, 'Invitation Required to Take Survey', class: 'form-control btn btn-default text-left' %>
+      </div>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+</div>
+<div class="col-sm-12">
+  <hr/>
+  <h2 class="page-header">Survey Content</h2>
+</div>
+<div class="col-sm-12">
+  <div class="form-group<%= f.object.errors[:headline].empty? ? '' : ' has-error has-feedback' %>">
+    <%#= f.label :headline, { class: 'control-label col-sm-1' } %>
+    <div class="col-sm-12">
+      <%= f.text_field :headline, { class: 'form-control title-control', placeholder: "Survey Page Headline" } %>
+    </div>
+  </div>
+</div>
+<div class="col-sm-12">
+  <div class="form-group<%= f.object.errors[:subheader].empty? ? '' : ' has-error has-feedback' %>">
+    <%#= f.label :subheader, { class: 'control-label col-sm-1' } %>
+    <div class="col-sm-12">
+      <%= f.text_area :subheader, { class: 'form-control', rows: '2', placeholder: "Paragraph text..." } %>
+    </div>
+  </div>
+</div>
+<div class="col-sm-12">
+  <hr/>
+  <h3 class="page-header">Survey Items To Stack Rank</h3>
+</div>
+
+<div class="col-sm-12">
+  <div id="survey-items-has-loaded" style="display:none">
+    
+    <div class="pull-right">
+      <a id="survey-items-add-button" class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+        Add Survey Item
+      </a>
+    </div>
+    <p class="clearfix">&nbsp;</p>
+
+    <div id="no-survey-items">
+      <div class="alert alert-warning" role="alert"><div class="text-center">No survey items yet.</div></div>
+    </div>
+    <ul id="survey-items" class="list-group">
+    </ul>
+  </div>
+  <div id="survey-items-loading">
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <div id="survey-item-show-template" style="display:none" rel="<%= polymorphic_path([@survey, @survey.survey_items.build]) %>">
+    <li class="list-group-item list-group-survey-item">
+      <%= render partial: 'survey_items/survey_item', locals: { survey_item: @survey.survey_items.build, max_out_columns_on_empty_thumbnail: false }%>
+    </li>
+  </div>
+
+  <!-- Modal for thumbnail saving -->
+  <div class="modal fade" id="survey-item-thumbnail-url-modal" tabindex="-1" role="dialog" aria-labelledby="survey-item-thumbnail-url-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="survey-item-thumbnail-url-modal-label">Set Survey Item Thumnail URL</h4>
+        </div>
+        <div class="modal-body">
+          <%= text_field_tag :set_thumbnail_url, nil, { class: 'form-control', placeholder: 'https://www.example.com/image1.png' } %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="survey-item-thumbnail-url-modal-cancel" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <a type="button" id="survey-item-thumnail-url-set" class="btn btn-primary">Set</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="survey-item-form-template" style="display:none" rel="<%= polymorphic_path([@survey, @survey.survey_items.build], format: :json) %>">
+    <li class="list-group-item list-group-survey-item-form">
+      <div id="survey-item-fields">
+        <div id="survey-item-fields-loading" style="display:none">
+          <div class="col-sm-12">
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%= fields_for :survey_item, @survey.survey_items.build do |survey_items_fields| %>
+        <%= render partial: 'survey_items/fields', locals: { f: survey_items_fields } %>
+        <% end %>
+        <div class="clearfix"></div>
+        <div>
+          <div class="pull-left">
+            <a id="revert-current-survey-item-button" class="btn btn-default btn-xs">
+              <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> 
+              Revert Changes
+            </a>
+          </div>
+          <div class="pull-right">
+            <a id="save-current-survey-item-button" class="btn btn-warning btn-xs">
+              <span class="glyphicon glyphicon-record" aria-hidden="true"></span> 
+              Save Item
+            </a>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </li>
+  </div>
+</div>
+
+<div class="col-sm-12">
+  <hr/>
+  <h2 class="page-header">After the Survey</h2>
+</div>
+
+<div class="col-sm-12">
+  <div class="form-group<%= f.object.errors[:thanks_headline].empty? ? '' : ' has-error has-feedback' %>">
+    <%#= f.label :thanks_headline, { class: 'control-label col-sm-1' } %>
+    <div class="col-sm-12">
+      <%= f.text_field :thanks_headline, { class: 'form-control title-control', placeholder: "Headline on Thank You Page" } %>
+    </div>
+  </div>
+</div>
+<div class="col-sm-12">
+  <div class="form-group<%= f.object.errors[:thanks_subheader].empty? ? '' : ' has-error has-feedback' %>">
+    <%#= f.label :thanks_subheader, { class: 'control-label col-sm-1' } %>
+    <div class="col-sm-12">
+      <%= f.text_area :thanks_subheader, { class: 'form-control', rows: '2', placeholder: "Paragraph text..." } %>
+    </div>
+  </div>
+</div>
+<div class="col-sm-12">
+  <div class="form-group<%= f.object.errors[:thanks_continue_url].empty? ? '' : ' has-error has-feedback' %>">
+    <%= f.label :thanks_continue_url, 'Continue Button URL', { class: 'control-label col-sm-4' } %>
+    <div class="col-sm-8">
+      <%= f.text_field :thanks_continue_url, { class: 'form-control', placeholder: 'http://www.example.com/' } %>
+    </div>
+  </div>
+</div>
+
+<% end %>
+<div class="actions text-center">
+  <%= f.submit class: 'btn btn-success' %>
+</div>
+<% end %>

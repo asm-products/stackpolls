@@ -1,0 +1,33 @@
+<% content_for :page_title do %>
+item_ranks -
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>Listing item_ranks</h1>
+  </div>
+  
+  <div class="pull-right">
+    <%= link_to '+ New item_rank', new_item_rank_path, class: 'btn btn-success' %>
+  </div>
+  
+  <table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Response</th>
+      <th>Survey item</th>
+      <th>Rank</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @item_ranks.each do |item_rank| %>
+      <tr class="linked-row" data-href="<%= item_rank_path(item_rank) %>">
+        <td><%= link_to item_rank.response, item_rank %></td>
+        <td><%= item_rank.survey_item %></td>
+        <td><%= item_rank.rank %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>

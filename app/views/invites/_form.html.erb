@@ -1,0 +1,33 @@
+<%= form_for([@invite.survey, @invite], { html: { role: 'form', class: 'form-horizontal'}}) do |f| %>
+  <% if @invite.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <strong><%= pluralize(@invite.errors.count, "error") %> prohibited this invite from being saved:</strong>
+
+      <ul>
+      <% @invite.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-sm-12">
+    <div class="form-group<%= f.object.errors[:name].empty? ? '' : ' has-error has-feedback' %>">
+        <%= f.label :name, { class: 'control-label col-sm-1' } %>
+        <div class="col-sm-11">
+          <%= f.text_field :name, { class: 'form-control', autofocus: 'autofocus' } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="form-group<%= f.object.errors[:email].empty? ? '' : ' has-error has-feedback' %>">
+        <%= f.label :email, { class: 'control-label col-sm-1' } %>
+        <div class="col-sm-11">
+          <%= f.text_field :email, { class: 'form-control', type: 'email' } %>
+      </div>
+    </div>
+  </div>
+  <div class="actions text-center">
+    <%= f.submit class: 'btn btn-success' %>
+  </div>
+<% end %>

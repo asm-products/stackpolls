@@ -1,0 +1,89 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#welcome-page .jumbotron {
+  background: #d4def3 image-url('welcome/jumbotron-bg.jpg') no-repeat center center;
+  background-size: 100%;
+  padding-bottom:56px;
+  color:rgba(255,255,255,0.9);
+}
+#welcome section p {
+  font-size:2em;
+  color:#888;
+  font-weight:200;
+}
+#welcome section h3 {
+  font-weight:200;
+  font-size:3em;
+}
+#welcome-page .jumbotron .screenshot {
+  padding-top:3em;
+}
+#welcome-page .jumbotron .screenshot img {
+  border-radius: 4px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.2  );
+}
+#welcome section+section {
+
+  margin-top: 100px;
+  border-top:1px solid #ccc; 
+}
+#welcome section {
+  margin-top: 50px;
+  padding-top:100px;
+}
+.subnav-affixer.affix-top {
+  width:100%;
+  position:absolute;
+}
+.subnav-affixer .navbar {
+  border-radius:0;
+}
+
+.subnav-affixer.affix {
+  width:100%;
+  top: 51px;
+  border-top:0;
+//  filter: blur(2px);
+//  -webkit-filter: blur(2px);
+  
+}
+.subnav-affixer .navbar-default .navbar-collapse,
+.subnav-affixer .navbar-default .navbar-form {
+  border-color: rgba(76, 111, 194,0.45);
+}
+.subnav-affixer.affix-top .navbar-default, 
+.subnav-affixer.affix-top .navbar-default {
+  background:none;
+  border-color: transparent;
+
+}
+.subnav-affixer.affix .navbar-default, 
+.subnav-affixer.affix .navbar-default {
+  background-color: rgba(76, 111, 194,0.7);
+  border-color: rgba(76, 111, 194,0.45);
+  border-top-width:0px;
+
+}
+.subnav-affixer.affix-top .navbar-default .navbar-nav>li>a {
+  color:rgba(76, 111, 194,0.9);
+}
+.subnav-affixer.affix .navbar-default .navbar-nav>li>a {
+  color:rgba(255,255,255,0.9);
+}
+.subnav-affixer li a {
+  border-top: 2px solid transparent ;
+  border-bottom: 2px solid transparent ;
+}
+.subnav-affixer.affix-top li:hover a {
+  border-bottom:2px solid rgba(76, 111, 194,0.9);
+}
+.subnav-affixer li.active a {
+  border-bottom:2px solid rgba(255,255,255,0.9);
+}
+.subnav-affixer .navbar-default .navbar-nav>.active>a, 
+.subnav-affixer .navbar-default .navbar-nav>.active>a:hover, 
+.subnav-affixer .navbar-default .navbar-nav>.active>a:focus {
+  background: none; 
+}

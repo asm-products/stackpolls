@@ -1,0 +1,84 @@
+<%= form_for([@response.survey, @response], { html: { role: 'form', class: 'form-horizontal'}}) do |f| %>
+<% if @response.errors.any? %>
+<div id="error_explanation" class="alert alert-danger" role="alert">
+  <strong><%= pluralize(@response.errors.count, "error") %> prohibited this response from being saved:</strong>
+
+  <ul>
+    <% @response.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<% if @response.invite %>
+<%= hidden_field_tag 'invite', @response.invite.token %>
+<% end %>
+
+
+<div class="col-sm-12">
+  <div class="form-group<%= f.object.errors[:email].empty? && f.object.errors[:name].empty? ? '' : ' has-error has-feedback' %>">
+    <div class="input-group">
+      <span class="input-group-addon"><%= f.label :name, 'Your Details' %></span>
+      <div class="input-group-btn">
+        <%= f.text_field :name, { class: 'form-control', size: '15', placeholder: 'Name', autofocus: 'autofocus' } %>
+      </div>
+      <%= f.text_field :email, { class: 'form-control', placeholder: 'Email', type: 'email' } %>
+    </div>
+  </div>
+</div>
+
+<div class="ranking-instructions">
+  <div class="alert alert-info" role="alert">
+    <strong>And provide your ranking</strong>
+    - just drag and drop the following items (top is highest/best).
+  </div>
+</div>
+<p>&nbsp;</p>
+
+<!-- Modal for thumbnail zoom -->
+<div class="modal fade modal-without-padding" id="survey-item-thumbnail-zoom-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close outside-modal-close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <img class="thumbnail-zoomed">
+      </div>
+    </div>
+  </div>
+</div>
+  
+<div id="item-ranks" class="survey-item-responses">
+  <ul id="item-ranks-list" class="list-group">
+    <%= f.fields_for :item_ranks do |item_rank_form| %>
+    <li class="list-group-item">
+      <div class="item-rank">
+        <button type="button" class="disabled btn btn-default drag-handle" aria-expanded="true">
+          <span class="sr-only">Drag to Re-Arrange Ranking</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= item_rank_form.hidden_field :rank, class: 'rank-field' %>
+        <%= item_rank_form.hidden_field :survey_item_id %>
+        <%= render partial: 'survey_items/survey_item', locals: { survey_item: item_rank_form.object.survey_item, max_out_columns_on_empty_thumbnail: true } %>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="col-sm-12">
+  <div class="form-group<%= f.object.errors[:comments].empty? ? '' : ' has-error has-feedback' %>">
+    <%#= f.label :comments, { class: 'control-label col-sm-1' } %>
+    <div class="col-sm-12">
+      <%= f.text_area :comments, { class: 'form-control', rows: '2', placeholder: "Optional - write any additional ideas & comments..." } %>
+    </div>
+  </div>
+</div>
+
+
+<div class="actions text-center">
+  <%= f.submit 'Submit Response', class: 'btn btn-success' %>
+</div>
+<% end %>

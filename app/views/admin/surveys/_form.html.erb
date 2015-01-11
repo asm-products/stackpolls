@@ -1,0 +1,94 @@
+<%= form_for(@survey, { html: { role: 'form', class: 'form-horizontal'}}) do |f| %>
+  <% if @survey.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <strong><%= pluralize(@survey.errors.count, "error") %> prohibited this survey from being saved:</strong>
+
+      <ul>
+      <% @survey.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-sm-12">
+    <div class="form-group<%= f.object.errors[:user_id].empty? ? '' : ' has-error has-feedback' %>">
+        <%= f.label :user_id, { class: 'control-label col-sm-1' } %>
+        <div class="col-sm-11">
+          <%= f.text_field :user_id, { class: 'form-control' } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="form-group<%= f.object.errors[:permalink].empty? ? '' : ' has-error has-feedback' %>">
+        <%= f.label :permalink, { class: 'control-label col-sm-1' } %>
+        <div class="col-sm-11">
+          <%= f.text_field :permalink, { class: 'form-control' } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="form-group<%= f.object.errors[:title].empty? ? '' : ' has-error has-feedback' %>">
+        <%= f.label :title, { class: 'control-label col-sm-1' } %>
+        <div class="col-sm-11">
+          <%= f.text_field :title, { class: 'form-control' } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="form-group<%= f.object.errors[:headline].empty? ? '' : ' has-error has-feedback' %>">
+        <%= f.label :headline, { class: 'control-label col-sm-1' } %>
+        <div class="col-sm-11">
+          <%= f.text_field :headline, { class: 'form-control' } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="form-group<%= f.object.errors[:subheader].empty? ? '' : ' has-error has-feedback' %>">
+        <%= f.label :subheader, { class: 'control-label col-sm-1' } %>
+        <div class="col-sm-11">
+          <%= f.text_field :subheader, { class: 'form-control' } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="form-group<%= f.object.errors[:thanks_headline].empty? ? '' : ' has-error has-feedback' %>">
+        <%= f.label :thanks_headline, { class: 'control-label col-sm-1' } %>
+        <div class="col-sm-11">
+          <%= f.text_field :thanks_headline, { class: 'form-control' } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="form-group<%= f.object.errors[:thanks_subheader].empty? ? '' : ' has-error has-feedback' %>">
+        <%= f.label :thanks_subheader, { class: 'control-label col-sm-1' } %>
+        <div class="col-sm-11">
+          <%= f.text_field :thanks_subheader, { class: 'form-control' } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="form-group<%= f.object.errors[:thanks_continue_url].empty? ? '' : ' has-error has-feedback' %>">
+        <%= f.label :thanks_continue_url, { class: 'control-label col-sm-1' } %>
+        <div class="col-sm-11">
+          <%= f.text_field :thanks_continue_url, { class: 'form-control' } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="form-group<%= f.object.errors[:invite_required].empty? ? '' : ' has-error has-feedback' %>">
+        <%= f.label :invite_required, { class: 'control-label col-sm-1' } %>
+        <div class="col-sm-11">
+          <div class="input-group">
+      <span class="input-group-addon">
+        <%= f.check_box :invite_required %>
+      </span>
+      <%= f.label :invite_required, 'Yes' %>
+    </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions text-center">
+    <%= f.submit class: 'btn btn-success' %>
+  </div>
+<% end %>

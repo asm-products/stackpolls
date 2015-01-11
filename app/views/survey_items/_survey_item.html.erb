@@ -1,0 +1,20 @@
+<%# Send max_out_columns_on_empty_thumbnail to remove thumbnails if empty -%>
+<div class="survey-item<%= survey_item.thumbnail_url.blank? ? ' no-thumbnail' : '' %>" id="survey_item_<%= survey_item.id %>" rel="<%= polymorphic_url([survey_item.survey, survey_item], format: 'json') %>">
+  <div class="row">
+    <% unless max_out_columns_on_empty_thumbnail && survey_item.thumbnail_url.blank? %>
+    <div class="col-sm-3 survey-thumbnail-box">
+      <a class="thumbnail with-zoom-icon" data-toggle="modal" data-target="#survey-item-thumbnail-zoom-modal" data-fullsize-url="<%= survey_item.thumbnail_url %>" title="Click to zoom.">
+        <img src="<%= survey_item.thumbnail_url || image_url('question-mark.png') %>">
+        <span class="thumbnail-zoom-icon"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></span>
+      </a>
+    </div>
+    <% end %>
+
+    <div class="<%= max_out_columns_on_empty_thumbnail && survey_item.thumbnail_url.blank? ? 'col-sm-12' : 'col-sm-9' %> survey-content-box">
+      <h3 class="headline"><%= survey_item.headline %></h3>
+      <div class="description">
+        <%= simple_format survey_item.description %>
+      </div>
+    </div>
+  </div>
+</div>

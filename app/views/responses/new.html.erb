@@ -1,0 +1,37 @@
+<% content_for :page_title do %>
+<%= @response.survey.title %> -
+<% end %>
+<div class="jumbotron">
+  <div class="container">
+    <h1><%= @response.survey.headline.blank? ? @response.survey.title : @response.survey.headline %></h1>
+    <% unless @response.survey.subheader.blank? %>
+    <p class="lead"><%= @response.survey.subheader %></p>
+    <% end %>
+  </div>
+</div>
+    
+<div class="container">
+
+  <%= render 'form' %>
+
+  <div class="clearfix"></div>
+
+</div>
+
+<div class="modal fade" id="submitting-modal" tabindex="-1" role="dialog" aria-labelledby="submitting-modal-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="submitting-modal-label">Submitting Response...</h4>
+      </div>
+      <div class="modal-body">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<% content_for :page_title do %>
+Edit <%= @survey.title%> -
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>Editing survey</h1>
+  </div>
+
+  <%= render 'form' %>
+
+  <div class="clearfix"></div>
+
+  <div class="pull-left">
+    <%= link_to '&laquo; Back'.html_safe, @survey, class: 'btn btn-default' %> 
+  </div>
+  <div class="pull-right">
+    <%= link_to 'Delete Survey...', @survey, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  </div>
+</div>

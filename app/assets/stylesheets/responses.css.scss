@@ -1,0 +1,84 @@
+// Place all the styles related to the responses controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.survey-item-responses .survey-item {
+  cursor:move;
+  margin-right:65px;
+}
+
+.survey-item-responses .item-rank {
+  cursor:move;
+  position:relative;
+}
+.survey-item-responses .item-rank .drag-handle {
+  position:absolute;
+  right: 5px;
+  top: 25%;
+}
+
+.survey-item-responses .item-rank .thumbnail,
+.survey-item-responses .item-rank .thumbnail img {
+  cursor:pointer;
+}
+
+#response_name {
+  min-width:10em;
+}
+.btn.disabled.drag-handle {
+  cursor: move;
+}
+.drag-handle .icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: #eee;
+}
+.drag-handle .icon-bar+.icon-bar {
+  margin-top: 4px;
+}
+
+td.na-column {
+  color:#ccc;
+}
+
+td .histogram {
+  height:2em;
+  width:150px;
+}
+
+.tablesorter thead {
+  cursor:pointer;
+}
+.tablesorter th {
+  background-position:right 9px center;
+  background-size: 10px 11.23px;
+  background-repeat: no-repeat;
+}
+.tablesorter th span {
+  padding-right: 10px;
+}
+
+.tablesorter th.headerSortUp {
+  background-image: image-url('sortable-up.png');
+}
+.tablesorter th.headerSortDown {
+  background-image: image-url('sortable-down.png');
+}
+.modal .thumbnail-zoomed {
+  max-width:100%;
+}
+
+.modal .outside-modal-close {
+  position: absolute;
+  right: -25px;
+  color: #fff;
+  opacity: 1;
+  font-weight: normal;
+  text-shadow: 0 1px 0 #000;
+}
+
+.modal-without-padding .modal-body {
+  padding: 0;
+}

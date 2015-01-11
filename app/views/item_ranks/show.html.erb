@@ -1,0 +1,31 @@
+<% content_for :page_title do %>
+Item Rank for '<%= @item_rank.response.survey.title %>' Survey -
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>Item Rank</h1>
+  </div>
+  
+<p>
+  <strong>Response:</strong>
+  <%= @item_rank.response %>
+</p>
+
+<p>
+  <strong>Survey item:</strong>
+  <%= @item_rank.survey_item %>
+</p>
+
+<p>
+  <strong>Rank:</strong>
+  <%= @item_rank.rank %>
+</p>
+
+
+  <div class="pull-left">
+    <%= link_to '&laquo; Back'.html_safe, item_ranks_path, class: 'btn btn-default' %> 
+  </div>
+  <div class="pull-right">
+    <%= link_to '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit'.html_safe, edit_item_rank_path(@item_rank), class: 'btn btn-warning' %> 
+  </div>
+</div>

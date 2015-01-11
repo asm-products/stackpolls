@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  survey_id: 
+  token: MyString
+  email: MyString
+  name: MyString
+
+two:
+  survey_id: 
+  token: MyString
+  email: MyString
+  name: MyString

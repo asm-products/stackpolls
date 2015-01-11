@@ -1,0 +1,54 @@
+<% content_for :page_title do %>
+Editor -
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to '<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>'.html_safe, survey_editors_path(@survey), class: 'btn btn-default', title: 'Back to editors' %> 
+        &nbsp;
+      </div>
+
+      
+      <div class="pull-right">
+        <%= link_to 'Remove Editor...', [@survey, @editor], method: :delete, data: { confirm: 'Are you sure you want to remove this editor?' }, class: 'btn btn-danger' %>
+      </div>
+      
+      Editor
+      
+      <small>for '<%= @survey.title %>' Survey</small>
+    </h1>
+  </div>
+  
+
+  <div class="row">
+    <label class="label-control col-sm-3 text-right text-muted" for="accept-survey-editor-url">Invite Link:</label>
+    <div class="col-sm-9">
+      <% if @editor.accepted_at.blank? %>
+      <input id="accept-survey-editor-url" class="form-control text-center select-all-on-click" type="text" value="<%= invite_survey_editor_url(@editor.survey, @editor) %>" readonly>
+      <% else %>
+      <span class="text-muted">N/A</span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Email:</label>
+    <div class="col-sm-9"><%= @editor.email %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Inviter:</label>
+    <div class="col-sm-9"><%= @editor.inviter.name %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Accepted:</label>
+    <div class="col-sm-9"><%= @editor.accepted_at.blank? ? '-never-' : "#{time_ago_in_words(@editor.accepted_at)} ago" %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Account:</label>
+    <div class="col-sm-9"><%= @editor.user ? @editor.user.name : '<span class="text-muted">N/A</span>'.html_safe %></div>
+  </div>
+</div>

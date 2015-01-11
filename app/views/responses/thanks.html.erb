@@ -1,0 +1,20 @@
+<% content_for :page_title do %>
+Thanks for your response to <%= @survey.title %> -
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      <%= @response.survey.thanks_headline.blank? ? Survey.default_thanks_headline : @response.survey.thanks_headline %>
+    </h1>
+  </div>
+  
+  <p>
+    <%= @response.survey.thanks_subheader.blank? ? Survey.default_thanks_subheader : @response.survey.thanks_subheader %>
+  </p>
+
+
+  <% unless @response.survey.thanks_continue_url.blank? %>
+  <a class="btn btn-default" href="<%= @response.survey.thanks_continue_url %>">Continue &raquo;</a>
+  <% end %>
+
+</div>

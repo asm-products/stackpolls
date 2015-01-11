@@ -1,0 +1,35 @@
+// Place all the styles related to the surveys controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.btn.btn-default.text-left {
+  text-align:left;
+}
+
+.title-control {
+  font-size: 150%;
+  text-align:center;
+}
+
+#survey-items-has-loaded li.list-group-survey-item:hover {
+  background-color:#eee;
+  cursor:pointer;
+}
+
+.survey-item.no-thumbnail .survey-thumbnail-box a.thumbnail {
+  display:none;
+}
+
+td.ago-column {
+  text-align:center;
+}
+td.ago-column.created-ago-column {
+  color:#ccc;
+  font-size:75%;
+  vertical-align:middle;
+}
+td.count-column {
+  text-align:center;
+}
+td.boolean-column {
+  text-align:center;
+}

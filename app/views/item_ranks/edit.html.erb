@@ -1,0 +1,19 @@
+<% content_for :page_title do %>
+Edit item_rank -
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>Editing item_rank</h1>
+  </div>
+
+  <%= render 'form' %>
+
+  <div class="clearfix"></div>
+
+  <div class="pull-left">
+    <%= link_to '&laquo; Back'.html_safe, @item_rank, class: 'btn btn-default' %> 
+  </div>
+  <div class="pull-right">
+    <%= link_to 'Delete item_rank...', @item_rank, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  </div>
+</div>

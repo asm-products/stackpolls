@@ -1,0 +1,27 @@
+# Be sure to restart your server when you modify this file.
+
+development:
+  cookie_store_key: _stack-rank-survey_session
+  html_title_postfix: StackPolls
+  navbar_brand_html: StackPolls
+  profile_link_href: /account
+  maintained_by_footer_html: Designed and made by ThriveSmart, Inc.
+  last_nav_li_html: <a href="/about"><span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> About</a>
+  
+
+test:
+  cookie_store_key: _stack-rank-survey_session
+  html_title_postfix: StackPolls
+  navbar_brand_html: StackPolls
+  profile_link_href: /account
+  maintained_by_footer_html: Designed and made by ThriveSmart, Inc.
+  last_nav_li_html: <a href="/about"><span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> About</a>
+
+production:
+  cookie_store_key: _stack-rank-survey_session
+  html_title_postfix: StackPolls
+  navbar_brand_html: StackPolls
+  profile_link_href: /account
+  maintained_by_footer_html: Designed and made by ThriveSmart, Inc.
+  last_nav_li_html: <a href="/about"><span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> About</a>
+

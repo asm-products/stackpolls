@@ -1,0 +1,30 @@
+<% content_for :page_title do %>
+<%= @invite.name %>'s Invitation for '<%= @survey.title %>' Survey -
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to '<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>'.html_safe, survey_invites_path(@invite.survey), class: 'btn btn-default', title: 'Back to Invites' %> 
+        &nbsp;
+      </div>
+      
+      <div class="pull-right">
+        <%= link_to 'Revoke Invite...', [@survey, @invite], method: :delete, data: { confirm: 'Are you sure you want to revoke this invite?' }, class: 'btn btn-danger' %>
+      </div>
+      
+      <%= @invite.name %>'s Invitation
+      
+      <small>for '<%= @survey.title %>' Survey</small>
+    </h1>
+  </div>
+  
+
+  <input class="form-control text-center select-all-on-click" type="text" value="<%= survey_invite_url(@invite.survey, @invite) %>" readonly>
+
+  <p class="text-center">
+    (for <%= link_to @invite.email, "mailto:#{@invite.email}" %>)
+  </p>
+
+
+</div>

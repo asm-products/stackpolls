@@ -1,0 +1,45 @@
+<% content_for :page_title do %>
+surveys -
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>Listing surveys</h1>
+  </div>
+  
+  <div class="pull-right">
+    <%= link_to '+ New survey', new_survey_path, class: 'btn btn-success' %>
+  </div>
+  
+  <table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Permalink</th>
+      <th>Title</th>
+      <th>Headline</th>
+      <th>Subheader</th>
+      <th>Thanks headline</th>
+      <th>Thanks subheader</th>
+      <th>Thanks continue url</th>
+      <th>Invite required</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @surveys.each do |survey| %>
+      <tr class="linked-row" data-href="<%= survey_path(survey) %>">
+        <td><%= link_to survey.user, survey %></td>
+        <td><%= survey.permalink %></td>
+        <td><%= survey.title %></td>
+        <td><%= survey.headline %></td>
+        <td><%= survey.subheader %></td>
+        <td><%= survey.thanks_headline %></td>
+        <td><%= survey.thanks_subheader %></td>
+        <td><%= survey.thanks_continue_url %></td>
+        <td><%= survey.invite_required %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>

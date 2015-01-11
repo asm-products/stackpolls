@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  response_id: 
+  survey_item_id: 
+  rank: 1
+
+two:
+  response_id: 
+  survey_item_id: 
+  rank: 1

@@ -1,0 +1,35 @@
+
+  
+  <div class="row">
+
+
+    <%= f.hidden_field :thumbnail_url %>
+    <div class="col-sm-3">
+      <a class="thumbnail edititng-thumbnail" data-toggle="modal" data-target="#survey-item-thumbnail-url-modal" title="Click to change thumbnail.">
+        <%= image_tag 'question-mark.png' %>
+      </a>
+    </div>
+    <div class="col-sm-9">
+      <div class="row">
+        <%= f.hidden_field :id %>
+        <div class="col-sm-12">
+          <div class="form-group<%= f.object.errors[:headline].empty? ? '' : ' has-error has-feedback' %>">
+            <%#= f.label :headline, { class: 'control-label col-sm-1' } %>
+            <div class="col-sm-12">
+              <%= f.text_field :headline, { class: 'form-control', placeholder: 'Item Headline' } %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group<%= f.object.errors[:description].empty? ? '' : ' has-error has-feedback' %>">
+            <%#= f.label :description, { class: 'control-label col-sm-1' } %>
+            <div class="col-sm-12">
+              <%= f.text_area :description, { class: 'form-control', rows: '2', placeholder: "Item description..." } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>

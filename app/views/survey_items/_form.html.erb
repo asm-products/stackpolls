@@ -1,0 +1,37 @@
+<%= form_for([(@survey_item || faux_survey_item).survey , (@survey_item || faux_survey_item)], { html: { role: 'form', class: 'form-horizontal'}}) do |f| %>
+  <% if (@survey_item || faux_survey_item).errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <strong><%= pluralize((@survey_item || faux_survey_item).errors.count, "error") %> prohibited this survey_item from being saved:</strong>
+
+      <ul>
+      <% (@survey_item || faux_survey_item).errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= render partial: 'fields', locals: { f: f } %>
+  <!-- Modal -->
+  <div class="modal fade" id="survey-item-thumbnail-url-modal" tabindex="-1" role="dialog" aria-labelledby="survey-item-thumbnail-url-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="survey-item-thumbnail-url-modal-label">Set Survey Item Thumnail URL</h4>
+        </div>
+        <div class="modal-body">
+          <%= f.text_field :thumbnail_url, { class: 'form-control', placeholder: 'https://www.example.com/image1.png' } %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="survey-item-thumbnail-url-modal-cancel" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="button" id="survey-item-thumnail-url-set" class="btn btn-primary">Set</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="actions text-center">
+    <%= f.submit class: 'btn btn-success' %>
+  </div>
+<% end %>

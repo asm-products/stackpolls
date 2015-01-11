@@ -1,0 +1,17 @@
+<% content_for :page_title do %>
+Create Invite for '<%= @survey.title %>' Survey -
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      New invite 
+      <small>for '<%= @survey.title %>' Survey</small>
+    </h1>
+  </div>
+
+  <%= render 'form' %>
+
+  <div class="clearfix"></div>
+
+  <%= link_to 'Cancel', [@survey, :invites], class: 'btn btn-default' %>
+</div>

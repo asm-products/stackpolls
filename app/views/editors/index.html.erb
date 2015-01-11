@@ -1,0 +1,52 @@
+<% content_for :page_title do %>
+Editors for '<%= @survey.title %>' Survey -
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to '<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>'.html_safe, @survey, class: 'btn btn-default', title: 'Back to Survey' %> 
+        &nbsp;
+      </div>
+  
+      <div class="pull-right">
+        <%= link_to '+ Invite Editor', [:new, @survey, :editor], class: 'btn btn-success' %>
+      </div>
+      
+      Editors
+      <small>for '<%= @survey.title %>' Survey</small>
+    </h1>
+  </div>
+
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Account</th>
+        <th>Email</th>
+        <th class="ago-column">Accepted</th>
+        <th>Inviter</th>
+        <th class="ago-column">Created</th>
+        <th>Accept Link</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% unless @editors.any? %>
+      <tr id="empty-table">
+        <td class="bg-warning" colspan="6">No editors created yet.</td>
+      </tr>
+      <% end %>
+      <% @editors.each do |editor| %>
+      <tr class="linked-row" data-href="<%= survey_editor_path(editor.survey, editor) %>">
+        <td class="small-image-column"><% if editor.user %><%= link_to "#{image_tag(editor.user.picurl)} #{editor.user.name}".html_safe, [editor.survey, editor] %><% else %><span class="text-muted">N/A</span><% end %></td>
+        <td><%= editor.email %></td>
+        <td class="ago-column<%= editor.accepted_at.blank? ? ' never-ago' : "" %>"><%= editor.accepted_at.blank? ? '-never-' : "#{time_ago_in_words(editor.accepted_at)} ago" %></td>
+        <td class="small-image-column"><% if editor.inviter %><%= "#{image_tag(editor.inviter.picurl)} #{editor.inviter.name}".html_safe %><% end %></td>
+        <td class="ago-column created-ago-column"><%= "#{time_ago_in_words(editor.created_at)} ago"  %></td>
+        <td class="url-column"><%= editor.accepted_at.blank? ? "#{link_to invite_survey_editor_url(editor.survey, editor), '#'}".html_safe : 'N/A' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

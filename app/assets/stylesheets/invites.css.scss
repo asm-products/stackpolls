@@ -1,0 +1,18 @@
+// Place all the styles related to the invites controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table>tbody>tr>td.url-column,
+td.url-column {
+  color:#ccc;
+  font-size:55%;
+  vertical-align:middle;
+}
+
+.table>tbody>tr>td.url-column a {
+  text-decoration: none;
+  color:#ccc;
+}
+.table>tbody>tr>td.url-column a:hover {
+  text-decoration: underline;
+}

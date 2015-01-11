@@ -1,0 +1,53 @@
+<% content_for :page_title do %>
+My Surveys -
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      My Surveys
+  
+      <div class="pull-right">
+        <%= link_to '+ New survey', new_survey_path, class: 'btn btn-success' %>
+      </div>
+    </h1>
+  </div>
+  
+  
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th class="count-column">Invitations</th>
+        <th class="count-column">Responses</th>
+        <th class="ago-column last-response">Last Response</th>
+        <th class="boolean-column">Invitation Required</th>
+        <th class="count-column">Editors</th>
+        <th class="count-column">Items</th>
+        <th class="ago-column survey-created">Created</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <% unless @surveys.any? %>
+      <tr id="empty-table">
+        <td class="bg-warning" colspan="7">No surveys created yet.</td>
+      </tr>
+      <% end %>
+    
+      <% @surveys.each do |survey| %>
+      <tr class="linked-row" data-href="<%= survey_path(survey) %>">
+        <td><%= survey.title %></td>
+        <td class="count-column"><%= survey.invites.count %></td>
+        <td class="count-column"><%= survey.responses.count %></td>
+        <td class="ago-column last-response<%= survey.responses.count > 0 ? '' : ' never-ago' %>"><%= survey.responses.count > 0 ? "#{time_ago_in_words(survey.responses.order('created_at desc').first.created_at)} ago" : '-never-' %></td>
+        <td class="boolean-column <%= survey.invite_required ? 'true-column' : 'false-column' %>"><%= survey.invite_required ? '<span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Yes'.html_safe : '<span class="glyphicon glyphicon-fire" aria-hidden="true"></span>  No'.html_safe %></td>
+        <td class="count-column"><%= survey.editors.count %></td>
+        <td class="count-column"><%= survey.survey_items.count %></td>
+        <td class="ago-column created-ago-column"><%= time_ago_in_words(survey.created_at) %> ago</td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
